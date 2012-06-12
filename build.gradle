@@ -13,7 +13,7 @@ buildscript {
 
 
 // compile all of the HTML templates into pre-compiled Javascript templates
-task compileTemplates 
+task compileTemplates
 compileTemplates.TemplateAgent = "Handlebars"
 compileTemplates.appName = "MyApp"
 
