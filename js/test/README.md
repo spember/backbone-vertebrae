@@ -1,0 +1,1 @@
+Create your testing harness within this folder. I recommend [Jasmine](http://pivotal.github.com/jasmine/) for your unit tests

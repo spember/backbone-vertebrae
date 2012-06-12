@@ -1,0 +1,2 @@
+Place individual template files as .html here. Note that the names of the files directly correspond to their name within the 
+Namespace. E.g. naming a file "myNav.html" will cause the file to be created in the namespace as "<myApp>.Templates.myNav"
