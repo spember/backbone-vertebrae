@@ -2,6 +2,8 @@ import org.mozilla.javascript.ErrorReporter;
 import org.mozilla.javascript.EvaluatorException;
 import com.yahoo.platform.yui.compressor.JavaScriptCompressor
 
+
+// setting up the yui dependenacy for the build script itself
 buildscript {
     repositories {
         mavenCentral()
@@ -14,8 +16,10 @@ buildscript {
 
 // compile all of the HTML templates into pre-compiled Javascript templates
 task compileTemplates
-compileTemplates.TemplateAgent = "Handlebars"
-compileTemplates.appName = "MyApp"
+// setting up some custom properties. The gradle docs suggested placing task properties in an 'ext' object, but
+// I would always receive compilation errors. This way seems to work, even if it's not convention
+compileTemplates.TemplateAgent = "Handlebars" //name of the your templating class. I use Handlebars, but you could use Hogan with success
+compileTemplates.appName = "MyApp" //name of the App's namespace. TODO: have the build script pull this out of the JS files
 
 compileTemplates.doFirst {
     def files = gatherHTMLFiles()
@@ -37,11 +41,11 @@ compileTemplates.doFirst {
 // compress and minify all of the javascript into one file
 task compress(dependsOn: compileTemplates) {
 
-    baseJS = "js/src/app.js"//your 'root' file which sets up the namespace
+    rootJS = "js/src/app.js"//your 'root' file which sets up the namespace
 
     doFirst {
         
-        def files = gatherJavaScriptFiles([new File(compress.baseJS)] as Set)
+        def files = gatherJavaScriptFiles([new File(compress.rootJS)] as Set)
         def appFile = new File("js/app-min.js")
 
         appFile.withWriter { writer->
@@ -53,6 +57,24 @@ task compress(dependsOn: compileTemplates) {
                 }
             }
         }
+    }
+}
+
+
+// task which generates a javascript file that relies on head.js to include all the javascript files in the project
+// Intended for development purposes, so one does not have to manually add their individually created files to the head.js
+task generateDevelopment(dependsOn: compileTemplates) {
+
+    rootJS = "js/src/app.js" // the 'root' file which sets up the namespace
+
+    def files = gatherJavaScriptFiles([new File(compress.rootJS)] as Set)
+    def devFile = new File("js/app-development.js")
+
+    devFile.withWriter { writer->
+        writer.write "//// This file was automatically generated. Run 'gradle generateDevelopment' to rebuild\n"
+        writer.write "head.js(\n\t\""
+        writer.write files.join("\",\n\t\"")
+        writer.write "\", function () {" +compileTemplates.appName +".headComplete();})"
     }
 }
 
@@ -77,11 +99,13 @@ List gatherHTMLFiles(Set defaultSet) {
     gatherReadeableFilesByType(defaultSet, ".html")
 }
 
+// method to search the js/src folder tree
 List gatherReadeableFilesByType(Set files, String type) {
     if(!files) {
         files = [] as Set
     }
     new File("js/src").traverse() { file->
+        // only return readable files of our requested type
         if (file.isFile() && file.canRead() && file.getName().endsWith(type)) {
             files.add(file)
         }
@@ -91,18 +115,18 @@ List gatherReadeableFilesByType(Set files, String type) {
 
 // converts a given markup string and converts it into an excaped javascript string, ready for compiling
 String compileHTML(String text) {
-
     text.trim().replace("\n", "").replace("\"", "\\\"");
 }
+
 // the YUICompressor requires a class which implements ErrorReporter. 
 class SimpleErrorReporter implements ErrorReporter {
     public void warning(String message, String sourceName, int line, String lineSource, int lineOffset) {
-        println("WARNING: ${message}")
+        println("***WARNING: ${message}")
         println("Run with --info for more information")
     }
  
     public void error(String message, String sourceName, int line, String lineSource, int lineOffset) {
-        println("ERROR: ${message}")
+        println("***ERROR: ${message}")
         println("Run with --info for more information")
     }
  
