@@ -29,6 +29,10 @@ var MyApp = {
 MyApp.init = function () {
 	//display our one view
 	$("body").html(new MyApp.Views.Header().render().$el)
+		.append(new MyApp.Views.Message({text:"This is a sample message!"}).render().$el)
+		.append(new MyApp.Views.Message({text:"Please add more things!"}).render().$el)
+
+
 }
 // set up listener for headComplete
 MyApp.instance.on("load:complete", function () {
