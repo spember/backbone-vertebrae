@@ -58,14 +58,14 @@ module.exports = function(grunt) {
             files: [
                 "assets/js/libs/bower_components/underscore/underscore-min.js",
                 "assets/js/libs/bower_components/zepto/zepto.min.js",
-                "assets/js/libs/bower_components/baclbone/backbone-min.js",
+                "assets/js/libs/bower_components/backbone/backbone-min.js",
                 "assets/js/libs/bower_components/handlebars/handlebars.js",
                 // the included: false is mandatory in order to be loaded with requirejs; ignoring this causes the scripts to be loaded in 
                 // phantom, which causes requirejs to fail as the scripts have all ready been processed.
                 {pattern: "assets/js/app/**/*.js", included: false},
                 {pattern: "assets/js/test/**/*.js", included: false},
                 // test runner
-                "assets/js/test_init.js"
+                "assets/js/init_test.js"
             ],
             exclude: [
             // don't use the actual app init
