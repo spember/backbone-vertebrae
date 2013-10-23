@@ -1,4 +1,4 @@
-# Backbone Vertebra
+# Backbone Vertebrae
 
 This goal of this project is to outline a sample, simple folder structure for creating future Backbone apps. (In addition, it's an exercise for me to learn [Gradle][gradle], a fantastic build tool)
 

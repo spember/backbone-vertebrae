@@ -1,0 +1,34 @@
+{
+  "name": "backbone-vertebrae",
+  "version": "0.0.1",
+  "homepage": "https://github.com/spember/backbone-vertebrae",
+  "authors": [
+    "Steve Pember <spember@gmail.com>"
+  ],
+  "description": "Example template for using Backbone, Handlebars, Require, Grunt, Karma, Jasmine, and Bower",
+  "main": "assets/js/app/init.js",
+  "keywords": [
+    "backbone",
+    "templates"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "assets/js/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "underscore": "~1.5.2",
+    "backbone": "~1.1.0",
+    "zepto": "~1.0.0",
+    "requirejs": "~2.1.9",
+    "handlebars": "~1.0.0"
+  },
+  "devDependencies": {
+
+  }
+}
