@@ -28,12 +28,15 @@ The project is structured such that all static assets go into the 'assets' folde
 
 The JS folder contains the meat of the project. Here, we have the following folders: __app__ (application code), __libs__ (third-party libraries, including a sub-folder for [Bower][bower] downloaded code), and __test__ (test code). Within __app__, we break down further into subfolders for 'templates', 'views', 'models', etc. The __test__ app mirrors this structure, but contains "-Spec.js" files.
 
+In addition, __index.html__ gives an example of how to include the libraries to get started.
+
 ### Getting Started & Development
 
 1.    Ensure you have [NodeJS][node] (including [NPM](https://npmjs.org/)), [Grunt][grunt], [Bower][bower] and [Sass][sass] installed. Refer to their "getting started" guides to install
 1.    Navigate to the project folder, obviously
+1.    Configure the project to fit your environment / requirements: Update init.js, init.js, and Gruntfile.js to reflect your chosen project structure if different from this
 1.    Install the development dependencies by running: ```npm install``` (Note: I sometimes have to execute this twice for new enivronments)
-1.    Install the production dependencies by running: ```bower install``` 
+1.    Install the production dependencies by running: ```bower install``` (Note: update the .bowerrc file to change the bower installation path)
 
 At this point you'll be able to proceed with development. The goal is to keep your code as modular as possible: construct your code in the [AMD][amd] format and rely on [Require][require] to handle module loading.
 For example, consider the following View:
