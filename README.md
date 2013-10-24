@@ -76,13 +76,13 @@ All tests should be written as an [AMD][amd] module with [Jasmine][jasmine] synt
 
 *	```grunt handlebars```: precompile all handlebars templates
 *	```grunt sass```: process the .scss files into style.css
-*	```grunt jshint``: run jsHint through all specified files
+*	```grunt jshint```: run jsHint through all specified files
 *	```grunt karma```: execute the unit tests. By default this uses PhantomJS, and will watch your js files continously. Any change will re-run all tests	
 *	```grunt```: the default task will perform ``grunt jshint`` and ``grunt karma``
 
 and finally:
 
-*	```grunt watch``: this will run a continuous process which watches the .scss and .hbs files, then processes them appropriate if anything changes.
+*	```grunt watch```: this will run a continuous process which watches the .scss and .hbs files, then processes them appropriate if anything changes.
 
 I highly recommend having two terminals open during development, one dedicated to ```grunt watch``` and the other to ``grunt karma```. This will alert you immediately of any broken tests, and will automatically refresh your css and templates without you worrying about it after every change.
 
@@ -90,7 +90,7 @@ I highly recommend having two terminals open during development, one dedicated t
 
 There's not much optimization here. Missing components include minification, concatination, the [RequireJS][require] optimization steps, etc.
 
-[zepto]: http://zeptojs.com/ ""
+[zepto]: http://zeptojs.com/ 
 [underscore]: http://underscorejs.org/ "Underscore.js"
 [backbone]: http://backbonejs.org/  "Backbone.js"
 [handlebars]: http://handlebarsjs.com/ "Handlebars"
