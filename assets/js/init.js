@@ -15,6 +15,7 @@ require.config({
         handlebars: 'libs/bower_components/handlebars/handlebars',
         backbone: 'libs/bower_components/backbone/backbone-min',
         zepto: 'libs/bower_components/zepto/zepto.min',
+        helpers: 'app/templates/hbs-helpers',
         templates: 'app/templates/hbs-compiled',
     },
     // in order to load non-AMD js, we have to shim it
@@ -31,8 +32,9 @@ require.config({
             deps: ["zepto"],
             exports: "Handlebars"
         },
+        
         "templates": {
-            deps: ["handlebars"],
+            deps: ["helpers"],
             exports: "templates"
         },
         "backbone": {
