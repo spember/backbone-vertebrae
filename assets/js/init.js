@@ -1,7 +1,7 @@
 // set up epsilon namespace skeleton
 window.myNamespace = {
     templates: {},
-    data: {}
+    data: {},
 };
 
 require.config({
@@ -18,11 +18,11 @@ require.config({
         helpers: 'app/templates/hbs-helpers',
         templates: 'app/templates/hbs-compiled',
     },
-    // in order to load non-AMD js, we have to shim it
+    // in order to load non-AMD js 'window global' scripts, we have to shim it
     shim: {
         "zepto": {
             deps: [],
-            exports: "$"
+            exports: "$" // exports acts as the reference to the location we can find the object. 
         },
         "underscore": {
             deps: ["zepto"],
@@ -32,14 +32,16 @@ require.config({
             deps: ["zepto"],
             exports: "Handlebars"
         },
-        
-        "templates": {
-            deps: ["helpers"],
-            exports: "templates"
-        },
+        // this specification is somewhat redundant as we specify the location in the Grunt config, however, doing this here
+        // allows us to specify dependencies (e.g., the helpers). Note that we do not need the exports nor the specific 'deps'
+        // declaration. This pattern is used for things that only have dependencies and are injected appropriately elsewhere
+        // For example, jQuery plugins should find their own path ($.fn), and the grunt config for the compiled templates 
+        // specifies the namespace
+        "templates": ["helpers"],
+
         "backbone": {
             deps: ["underscore", "zepto", "handlebars"],
-            exports: "Backbone"  //attaches "Backbone" to the window object
+            exports: "Backbone"
         },
     }
 });

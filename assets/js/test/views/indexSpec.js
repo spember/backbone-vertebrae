@@ -1,7 +1,8 @@
-define(["app/views/index"], function() {
-	describe("Dummy Test", function() {
-		it("Shouldn't really do anything", function() {
-			expect(true).toBe(true);
+define(["app/views/index"], function(IndexView) {
+	describe("IndexView", function() {
+		it("Should have className set", function() {
+			var index = new IndexView();
+			expect(index.className).toBe("content");
 		});
 	});
 });

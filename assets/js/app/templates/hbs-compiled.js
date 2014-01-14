@@ -1,8 +1,9 @@
 define(['handlebars'], function(Handlebars) {
 
 this["myNamespace"] = this["myNamespace"] || {};
+this["myNamespace"]["templates"] = this["myNamespace"]["templates"] || {};
 
-this["myNamespace"]["index"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+this["myNamespace"]["templates"]["index"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, options, self=this, functionType="function", blockHelperMissing=helpers.blockHelperMissing;
@@ -23,6 +24,6 @@ function program1(depth0,data) {
   return buffer;
   });
 
-return this["myNamespace"];
+return this["myNamespace"]["templates"];
 
 });
