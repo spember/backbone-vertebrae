@@ -1,6 +1,6 @@
 # Backbone Vertebrae
 
-This goal of this project is to create a basic skeleton / structure for Single Page Web Applications. It's a culmination of working on several applications over the past year. I've found this structure to be very useful, and I hope you will too.
+This goal of this project is to create a basic skeleton / structure for Single Page Web Applications. It's meant to act as a guide / suggestion for building a Front End Javascript application. Vertebrae is a culmination of working on several applications over the past year. I've found this structure to be very useful, and I hope you will too.
 
 ### Technologies
 
@@ -21,6 +21,7 @@ Additionally, for development/deployment purposes Vertabrae also includes:
 *	[Jasmine][jasmine]: BDD JS testing
 *	[Bower][bower]: Package Manager; use to download libraries rather than check into source code
 
+The overall goal of encouraging the usage of a task runner like [Grunt][grunt] is to reinforce and encourage practices from the server-side world to your front end code.
 
 ### Overview and Layout
 
@@ -78,20 +79,44 @@ All tests should be written as an [AMD][amd] module with [Jasmine][jasmine] synt
 ### Grunt Tasks
 
 *	```grunt handlebars```: precompile all handlebars templates
-*	```grunt sass```: process the .scss files into style.css
+*	```grunt sass```: process the .scss files into ```assets/css/style.css```
 *	```grunt jshint```: run jsHint through all specified files
+*	```grunt requirejs```: compile the source JS files into one file, ```assets/js/compiled-app.js```
 *	```grunt karma```: execute the unit tests. By default this uses PhantomJS, and will watch your js files continously. Any change will re-run all tests	
 *	```grunt```: the default task will perform ``grunt jshint`` and ``grunt karma``
 
 and finally:
 
-*	```grunt watch```: this will run a continuous process which watches the .scss and .hbs files, then processes them appropriate if anything changes.
+*	```grunt watch```: this will run a continuous process which watches the .scss and .hbs files, then processes them appropriately if anything changes. 
 
 I highly recommend having two terminals open during development, one dedicated to ```grunt watch``` and the other to ``grunt karma```. This will alert you immediately of any broken tests, and will automatically refresh your css and templates without you worrying about it after every change.
 
+
+### Application Compilation / Production Deployment
+
+The current setup uses [Sass][sass] and the [RequireJS Optimizer][require] to compile the SCSS into CSS and concatinate & minify the source JS files into one main JS file.
+
+While the SASS task is set to run automatically with ```grunt watch```, the JS compilation is not. I recommend using the source files as part of development, but run the complication as part of your dpeloyment build.
+
+Currently, each task only creates one .css and one .js file, but this could be expanded to create several modules, useful in a larger multi-single page app, or if one wants to create multiple 'bundles' of their compiled files for different pages within a larger application (as opposed to loading all JS all the time).
+
+#### Using compiled-app.js
+
+The ```grunt requirejs``` task creates a compiled version at ```assets/js/compiled-app.js```. The test index.html file loads RequireJS, then loads ```assets/js/init.js```, the main configuration / initialization file. 
+In order to use the concatenated & minifed version, one must tell Require to load it instead. This is done by editing __index.html__ and replacing:
+
+
+```<script type="text/javascript" src="/assets/js/libs/bower_components/requirejs/	require.js" data-main="/assets/js/init"></script>```
+
+with 
+
+```<script type="text/javascript" src="/assets/js/libs/bower_components/requirejs/	require.js" data-main="/assets/js/compiled-app"></script>```
+
+
 ### Notes
 
-There's not much optimization here. Missing components include minification, concatination, the [RequireJS][require] optimization steps, etc.
+The compiled CSS and JS files are placed directly in the assets/css and assets/js folders, intermingled with the src code. This could perhaps be separated out into dedicated ```src``` folders for the SCSS and non-compiled JS code.
+
 
 [zepto]: http://zeptojs.com/ 
 [underscore]: http://underscorejs.org/ "Underscore.js"
