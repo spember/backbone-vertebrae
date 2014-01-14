@@ -106,11 +106,11 @@ The ```grunt requirejs``` task creates a compiled version at ```assets/js/compil
 In order to use the concatenated & minifed version, one must tell Require to load it instead. This is done by editing __index.html__ and replacing:
 
 
-```<script type="text/javascript" src="/assets/js/libs/bower_components/requirejs/	require.js" data-main="/assets/js/init"></script>```
+```<script type="text/javascript" src="/assets/js/libs/bower_components/requirejs/require.js" data-main="/assets/js/init"></script>```
 
 with 
 
-```<script type="text/javascript" src="/assets/js/libs/bower_components/requirejs/	require.js" data-main="/assets/js/compiled-app"></script>```
+```<script type="text/javascript" src="/assets/js/libs/bower_components/requirejs/require.js" data-main="/assets/js/compiled-app"></script>```
 
 
 ### Notes
