@@ -37,7 +37,9 @@ require.config({
         // declaration. This pattern is used for things that only have dependencies and are injected appropriately elsewhere
         // For example, jQuery plugins should find their own path ($.fn), and the grunt config for the compiled templates 
         // specifies the namespace
-        "templates": ["helpers"],
+        "templates": {
+            deps: ["helpers"]
+        },
 
         "backbone": {
             deps: ["underscore", "zepto", "handlebars"],

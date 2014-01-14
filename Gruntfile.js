@@ -5,7 +5,11 @@ module.exports = function(grunt) {
             // the all task covers all files, excluding the hbs-compiled (auto-generated) and any libs we use (we didn't write them)
             all: ['Gruntfile.js', 'assets/js/**/*.js'],
              options: {
-                ignores: ['assets/js/app/templates/hbs-compiled.js', 'assets/js/libs/**/*.js' ]
+                ignores: [
+                    'assets/js/app/templates/hbs-compiled.js',
+                    'assets/js/compiled-app.js',
+                    'assets/js/libs/**/*.js'
+                ]
             }
         },
         handlebars: {
@@ -82,9 +86,20 @@ module.exports = function(grunt) {
                 ]
               }
             },
-
+        },
+        // config for the RequireJS optimizer
+        requirejs: {
+            compile: {
+                // see full list of options here: https://github.com/jrburke/r.js/blob/master/build/example.build.js
+                options: {
+                    
+                    baseUrl: "./assets/js/",
+                    mainConfigFile: "./assets/js/init.js",
+                    name: "init",
+                    out: "./assets/js/compiled-app.js",
+                }
+            }
         }
-        
       });
     
     // there are methods to auto-load all load each package one by one
@@ -92,6 +107,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-handlebars');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-karma');
     grunt.registerTask('default', ['jshint', 'karma']);
 };

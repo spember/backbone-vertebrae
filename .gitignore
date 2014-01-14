@@ -1,5 +1,7 @@
 README.html
 assets/js/libs/bower_components
+# ignore the compiled app built by requirejs
+assets/js/compiled-app.js
 .sass-cache
 node_modules
 npm-debug.log
