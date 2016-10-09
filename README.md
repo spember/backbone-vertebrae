@@ -126,7 +126,7 @@ The compiled CSS and JS files are placed directly in the assets/css and assets/j
 [nodejs]: http://nodejs.org/ "NodeJS"
 [grunt]: http://gruntjs.com/ "Grunt"
 [karma]: http://karma-runner.github.io/0.10/index.html "Karma"
-[jasmine]: http://pivotal.github.io/jasmine/ "Jasmine"
+[jasmine]: https://jasmine.github.io/ "Jasmine"
 [bower]: http://bower.io/ "Bower"
 [sass]: http://sass-lang.com/ "Sass"
 [amd]: http://requirejs.org/docs/whyamd.html "Why AMD?"
